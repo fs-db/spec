@@ -92,20 +92,44 @@ ls crm/indexes/customers/first-name/John
 ## Operations
 
 ```java
+public interface Client {
+
+    void create(String databaseName);
+
+    Database open(String databaseName);
+
+    void delete(String databaseName);
+}
+```
+
+```java
+public interface Database {
+    void createCollection(String collectionName);
+   
+   Collection getCollection();
+
+    void deleteCollection(String collectionName);
+}
+```
+
+```java
 import java.util.function.Consumer;
 
-public interface Interface {
+public interface Collection {
+    void saveDocument(String documentId, byte[] document);
 
-    void save(String databaseName, String collectionName, String documentId, byte[] document);
+    byte[] getDocument(String documentId);
 
-    byte[] get(String databaseName, String collectionName, String documentId);
+    void deleteDocument(String documentId);
 
-    void delete(String databaseName, String collectionName, String documentId);
+    void createIndex(String indexName);
 
-    void index(String databaseName, String collectionName, String indexName, String indexValue, String documentId);
+    void index(String indexName, String indexValue, String documentId);
 
-    void deindex(String databaseName, String collectionName, String indexName, String indexValue, String documentId);
+    void find(String indexName, String indexValue, Consumer<byte[]> consumer);
 
-    void find(String databaseName, String collectionName, String indexName, String indexValue, Consumer<byte[]> consumer);
+    void unindex(String indexName, String indexValue, String documentId);
+
+    void deleteIndex(String indexName);
 }
 ```
