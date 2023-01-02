@@ -59,6 +59,12 @@ echo '{"firstName": "John"}' > crm/collections/customers/abc-123
 mkdir crm/indexes/customers/first-name
 # index that customer
 ln -s crm/collections/customers/abc-123 crm/indexes/customers/first-name/John/abc-123
+# list customers
+ls crm/collections/customers
+# get a customer
+cat crm/collections/customers/abc-123
+# find customers named "John"
+ls crm/indexes/customers/first-name/John
 ```
 
 
