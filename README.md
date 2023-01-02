@@ -67,4 +67,23 @@ cat crm/collections/customers/abc-123
 ls crm/indexes/customers/first-name/John
 ```
 
+## Limitations
 
+### Due To File System
+
+* Queries are only as fast a file-system operations.
+* File-systems have limitations on valid file name.
+* File-systems have limitations on number of files.
+* File-systems have limitations on file size.
+
+### Compared To Other Databases
+
+* No grouping operations.
+* No partial select.
+* No inner/outer join collections.
+
+## Benefits
+
+* Trivial human-readable syntax and semantics.
+* Portable.
+* Easily supports files.
