@@ -12,7 +12,7 @@
 
 * A **database** is a set of document collections. 
 * Every document is a member of a single collection.
-* A database has a unique identifier, which must be a legal filename.
+* A database has a unique name, which must be a legal filename.
 * A database is contained in a directory on the file-system. Everything in the directory is part the database. 
 
 E.g. `my-db`
@@ -21,7 +21,7 @@ E.g. `my-db`
 
 * A **collection** is a set of documents. 
 * Every collection is part of a single database.
-* A collection has a unique identifier, which must be a legal filename.
+* A collection has a unique name, which must be a legal filename.
 * A collection is container within single specific directory. Every file within that directory is a document.
 
 E.g. `my-db/collections/customers`
@@ -81,9 +81,31 @@ ls crm/indexes/customers/first-name/John
 * No grouping operations.
 * No partial select.
 * No inner/outer join collections.
+* Lacks ACID.
 
 ## Benefits
 
 * Trivial human-readable syntax and semantics.
 * Portable.
-* Easily supports files.
+* Supports large documents.
+
+## Operations
+
+```java
+import java.util.function.Consumer;
+
+public interface Interface {
+
+    void save(String databaseName, String collectionName, String documentId, byte[] document);
+
+    byte[] get(String databaseName, String collectionName, String documentId);
+
+    void delete(String databaseName, String collectionName, String documentId);
+
+    void index(String databaseName, String collectionName, String indexName, String indexValue, String documentId);
+
+    void deindex(String databaseName, String collectionName, String indexName, String indexValue, String documentId);
+
+    void find(String databaseName, String collectionName, String indexName, String indexValue, Consumer<byte[]> consumer);
+}
+```
